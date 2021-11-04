@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\FileImport;
+use App\Models\ImportData;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,7 +22,8 @@ class FileImportDataController extends Controller
         } else
         {
             Excel::import(new FileImport, $request->file('file')->store('temp'));
-            return back()->with('message', 'success');
+            return redirect()->route('task-list')
+                ->with('message', 'success');
         }
 
     }

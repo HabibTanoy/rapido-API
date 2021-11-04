@@ -4,13 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\ImportData;
 use Illuminate\Http\Request;
-
+use Carbon;
 class FileDataHandleController extends Controller
 {
-    public function show()
+    public function show(Request $request)
     {
-        $importTableData = ImportData::all();
-        return view('taskTableList', compact('importTableData'));
+        $import_table_data = ImportData::all();
+//        dd($import_table_data);
+        return response()->json([
+            'task' => $import_table_data,
+            'message' => 'message',
+            'status' => 200
+        ]);
     }
     public function updateData($id) {
         $per_person_info = ImportData::where('id', $id)
@@ -34,4 +39,18 @@ class FileDataHandleController extends Controller
             ->delete();
         return redirect()->route('task-list');
     }
+    public function dateFilter(Request $request) {
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+        $current_date = Carbon\Carbon::now()->format('Y-m-d');
+        if (is_null($start_date))
+            $start_date = $current_date;
+        if (is_null($end_date))
+            $end_date = $current_date;
+        $import_table_data = ImportData::whereDate('created_at', '>=', $start_date)
+            ->whereDate('created_at', '<=', $end_date)
+            ->get();
+        return view('taskTableList', compact('import_table_data'));
+    }
+
 }

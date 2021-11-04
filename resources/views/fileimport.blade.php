@@ -22,11 +22,11 @@
                 {{ session()->get('errorMessage') }}
             </div>
         @endif
-        @if(session('message'))
-            <div class="alert alert-success" role="alert">
-                {{ session()->get('message') }}
-            </div>
-        @endif
+{{--        @if(session('message'))--}}
+{{--            <div class="alert alert-success" role="alert">--}}
+{{--                {{ session()->get('message') }}--}}
+{{--            </div>--}}
+{{--        @endif--}}
 
     </form>
 </div>

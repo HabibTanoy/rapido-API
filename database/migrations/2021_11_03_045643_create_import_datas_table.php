@@ -20,6 +20,8 @@ class CreateImportDatasTable extends Migration
             $table->string('address')->nullable();
             $table->string('price')->nullable();
             $table->string('comment')->nullable();
+            $table->string('status')->nullable();
+            $table->string('assign_to')->nullable();
             $table->timestamps();
         });
     }
