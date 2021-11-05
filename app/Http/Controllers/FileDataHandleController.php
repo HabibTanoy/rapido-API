@@ -9,10 +9,27 @@ class FileDataHandleController extends Controller
 {
     public function show(Request $request)
     {
-        $import_table_data = ImportData::all();
-//        dd($import_table_data);
+        // $offset = $request->has('offset') ? $request->offset : 0;
+        // $limit = $request->has('limit') ? $request->limit : 10;
+
+        $import_table_data = ImportData::query();
+        if ($request->has('status')) {
+            $import_table_data->where('status', $request->status);
+        }
+        // if ($request->has('offset')) {
+        //     $offset = $request->offset;
+        // }
+
+        // if ($request->has('limit')) {
+        //     $limit = $request->limit;
+        // }
+
+        $import_table_data = $import_table_data->get();
+    //    dd($import_table_data);
         return response()->json([
             'task' => $import_table_data,
+            // 'offset' => (int) $offset,
+            // 'limit' => (int) $limit,
             'message' => 'message',
             'status' => 200
         ]);
