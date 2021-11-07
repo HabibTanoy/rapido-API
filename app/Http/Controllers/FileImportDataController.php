@@ -22,10 +22,15 @@ class FileImportDataController extends Controller
         } else
         {
             Excel::import(new FileImport, $request->file('file')->store('temp'));
-            return redirect()->route('task-list')
+            return redirect()->route('product-list')
                 ->with('message', 'success');
         }
 
+    }
+    public function product_list()
+    {
+        $list_of_product = ImportData::all();
+        return view('taskTableList', compact('list_of_product'));
     }
     //    public function fileExport()
 //    {

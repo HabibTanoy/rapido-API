@@ -44,20 +44,20 @@
     </tr>
     </thead>
     <tbody>
-        @foreach( $import_table_data as  $tableData)
+        @foreach( $list_of_product as  $product_list)
             <tr>
-                <td>{{$tableData->name}}</td>
-                <td>{{$tableData->phone}}</td>
-                <td>{{$tableData->address}}</td>
-                <td>{{$tableData->price}}</td>
-                <td>{{$tableData->comment}}</td>
+                <td>{{$product_list->name}}</td>
+                <td>{{$product_list->phone}}</td>
+                <td>{{$product_list->address}}</td>
+                <td>{{$product_list->price}}</td>
+                <td>{{$product_list->comment}}</td>
                 <td style="width:13%">
                     <div class="row">
                         <div class="col-md-4">
-                            <a class="btn btn-primary" href="{{route('task-update-info', $tableData->id)}}" role="button">Edit</a>
+                            <a class="btn btn-primary" href="{{route('task-update-info', $product_list->id)}}" role="button">Edit</a>
                         </div>
                         <div class="col-md-4">
-                            <form action="{{route('delete', $tableData->id)}}" method='post'>
+                            <form action="{{route('delete', $product_list->id)}}" method='post'>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>

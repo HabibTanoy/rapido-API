@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/task-list', 'App\Http\Controllers\FileDataHandleController@show')->name('task-list');
 Route::post('/task-list/assigned', 'App\Http\Controllers\StatusUpdateAPIController@assignedStatus');
 Route::post('/task-list/delivered', 'App\Http\Controllers\StatusUpdateAPIController@deliveredStatus');
+Route::post('/task-list/returned', 'App\Http\Controllers\StatusUpdateAPIController@returnStatus');
+Route::post('/task-list/cancelled', 'App\Http\Controllers\StatusUpdateAPIController@cancelStatus');

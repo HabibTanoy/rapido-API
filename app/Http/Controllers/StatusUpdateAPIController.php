@@ -13,60 +13,125 @@ class StatusUpdateAPIController extends Controller
     {
          $validator = Validator::make($request->all(),
          [
-             'task_id' => 'required',
-             'assign_to' => 'required'
+             'product_id' => 'required',
+             'delivery_id' => 'required'
          ]);
          if ($validator->fails()) {
              return response()->json([
-                 'message' => 'validation error'
+                 'message' => 'Parameter not found'
              ]);
          }
-        $task_id = $request->task_id;
-        $task = ImportData::find($task_id);
-//        dd($task);
-        if ($task->status != "created") {
+        $product_id = $request->product_id;
+        $product = ImportData::find($product_id);
+        if ($product->status != "created") {
             return response()->json([
-                'message' => 'Assigned Already'
+                'message' => 'Already Assigned'
             ]);
         }
         $assigned = 'assigned';
-        $task->update([
+        $product->update([
             'status' => $assigned,
-           'assign_to' => $request->assign_to
+           'assign_to' => $request->delivery_id
         ]);
         return response()->json([
-           "data" => $task,
+           "data" => $product,
            'message' => 'Assigned',
            'status' => 200
         ]);
     }
+    // Delivered API
     public function deliveredStatus(Request $request)
     {
         $validator = Validator::make($request->all(),
             [
-                'task_id' => 'required',
-                'received_amount' => 'required'
+                'product_id' => 'required',
+                'received_amount' => 'required',
+                'delivery_id' => 'required'
             ]);
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Parameter not found'
             ]);
         }
-        $task_id = $request->task_id;
-        $task = ImportData::find($task_id);
-        if ($task->status != "assigned") {
+        $product_id = $request->product_id;
+        $product = ImportData::find($product_id);
+        if ($product->status != "assigned") {
            return response()->json([
                 'message' => 'Already Delivered'
            ]);
         }
-        $task->update([
+        $product->update([
+            'assign_to' => $request->delivery_id,
             'received_amount' => $request->received_amount,
             'status' => 'delivered'
         ]);
         return response()->json([
-           'data' => $task,
-           'message' => 'Delivered',
+           'data' => $product,
+           'message' => 'Delivered Successfully',
            'status' => 200
+        ]);
+    }
+    //Return API
+    public function returnStatus(Request $request)
+    {
+        $validator = Validator::make($request->all(),
+            [
+                'product_id' => 'required',
+                'comments' => 'required',
+                'delivery_id' => 'required'
+            ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Parameter not found'
+            ]);
+        }
+        $product_id = $request->product_id;
+        $product = ImportData::find($product_id);
+        if ($product->status != "assigned") {
+            return response()->json([
+                'message' => 'Return Product'
+            ]);
+        }
+        $product->update([
+            'assign_to' => $request->delivery_id,
+            'delivery_comments' => $request->comments,
+            'status' => 'returned'
+        ]);
+        return response()->json([
+            'data' => $product,
+            'message' => 'Returned',
+            'status' => 200
+        ]);
+    }
+    public function cancelStatus(Request $request)
+    {
+        $validator = Validator::make($request->all(),
+            [
+                'product_id' => 'required',
+                'comments' => 'required',
+                'delivery_id' => 'required'
+            ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Parameter not found'
+            ]);
+        }
+        $product_id = $request->product_id;
+        $product = ImportData::find($product_id);
+        if ($product->status != "assigned") {
+            return response()->json([
+                'message' => 'Cancel Product'
+            ]);
+        }
+        $product->update([
+            'assign_to' => $request->delivery_id,
+            'delivery_comments' => $request->comments,
+            'status' => 'cancelled'
+        ]);
+        return response()->json([
+            'data' => $product,
+            'message' => 'Cancelled',
+//            'status' => 200
         ]);
     }
 }

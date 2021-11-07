@@ -9,27 +9,14 @@ class FileDataHandleController extends Controller
 {
     public function show(Request $request)
     {
-        // $offset = $request->has('offset') ? $request->offset : 0;
-        // $limit = $request->has('limit') ? $request->limit : 10;
-
         $import_table_data = ImportData::query();
         if ($request->has('status')) {
             $import_table_data->where('status', $request->status);
         }
-        // if ($request->has('offset')) {
-        //     $offset = $request->offset;
-        // }
-
-        // if ($request->has('limit')) {
-        //     $limit = $request->limit;
-        // }
 
         $import_table_data = $import_table_data->get();
-    //    dd($import_table_data);
         return response()->json([
             'task' => $import_table_data,
-            // 'offset' => (int) $offset,
-            // 'limit' => (int) $limit,
             'message' => 'message',
             'status' => 200
         ]);
@@ -49,12 +36,12 @@ class FileDataHandleController extends Controller
         ];
         ImportData::where('id', $id)
             ->update($person_update_info);
-        return redirect()->route('task-list');
+        return redirect()->route('product-list');
     }
     public function delete($id) {
         ImportData::where('id', $id)
             ->delete();
-        return redirect()->route('task-list');
+        return redirect()->route('product-list');
     }
     public function dateFilter(Request $request) {
         $start_date = $request->start_date;
