@@ -17,7 +17,7 @@ class FileDataHandleController extends Controller
         $import_table_data = $import_table_data->get();
         return response()->json([
             'task' => $import_table_data,
-            'message' => 'message',
+            'message' => 'Created',
             'status' => 200
         ]);
     }
