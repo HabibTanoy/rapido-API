@@ -14,7 +14,7 @@ class StatusUpdateAPIController extends Controller
          $validator = Validator::make($request->all(),
          [
              'product_id' => 'required',
-             'delivery_id' => 'required'
+             'delivery_man_id' => 'required'
          ]);
          if ($validator->fails()) {
              return response()->json([
@@ -31,7 +31,7 @@ class StatusUpdateAPIController extends Controller
         $assigned = 'assigned';
         $product->update([
             'status' => $assigned,
-           'assign_to' => $request->delivery_id
+           'assign_to' => $request->delivery_man_id
         ]);
         return response()->json([
            "data" => $product,
@@ -46,7 +46,7 @@ class StatusUpdateAPIController extends Controller
             [
                 'product_id' => 'required',
                 'received_amount' => 'required',
-                'delivery_id' => 'required'
+                'delivery_man_id' => 'required'
             ]);
         if ($validator->fails()) {
             return response()->json([
@@ -61,7 +61,7 @@ class StatusUpdateAPIController extends Controller
            ]);
         }
         $product->update([
-            'assign_to' => $request->delivery_id,
+            'assign_to' => $request->delivery_man_id,
             'received_amount' => $request->received_amount,
             'status' => 'delivered'
         ]);
@@ -78,7 +78,7 @@ class StatusUpdateAPIController extends Controller
             [
                 'product_id' => 'required',
                 'comments' => 'required',
-                'delivery_id' => 'required'
+                'delivery_man_id' => 'required'
             ]);
         if ($validator->fails()) {
             return response()->json([
@@ -93,7 +93,7 @@ class StatusUpdateAPIController extends Controller
             ]);
         }
         $product->update([
-            'assign_to' => $request->delivery_id,
+            'assign_to' => $request->delivery_man_id,
             'delivery_comments' => $request->comments,
             'status' => 'returned'
         ]);
@@ -109,7 +109,7 @@ class StatusUpdateAPIController extends Controller
             [
                 'product_id' => 'required',
                 'comments' => 'required',
-                'delivery_id' => 'required'
+                'delivery_man_id' => 'required'
             ]);
         if ($validator->fails()) {
             return response()->json([
@@ -124,7 +124,7 @@ class StatusUpdateAPIController extends Controller
             ]);
         }
         $product->update([
-            'assign_to' => $request->delivery_id,
+            'assign_to' => $request->delivery_man_id,
             'delivery_comments' => $request->comments,
             'status' => 'cancelled'
         ]);
