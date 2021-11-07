@@ -22,6 +22,7 @@ class CreateImportDatasTable extends Migration
             $table->string('comment')->nullable();
             $table->string('status')->nullable();
             $table->string('assign_to')->nullable();
+            $table->string('received_amount')->nullable();
             $table->timestamps();
         });
     }
