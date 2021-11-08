@@ -10,6 +10,14 @@ class StatusUpdateAPIController extends Controller
 {
     public function productList()
     {
+        $all_products_list = ImportData::get();
+        return response()->json([
+           'data' => $all_products_list,
+           'status' => 200
+        ]);
+    }
+    public function productListCreated()
+    {
         $products = ImportData::where('status', '=', 'created')
             ->get();
         return response()->json([
