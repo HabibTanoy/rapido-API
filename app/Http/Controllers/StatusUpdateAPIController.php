@@ -8,6 +8,24 @@ use Illuminate\Support\Facades\Validator;
 
 class StatusUpdateAPIController extends Controller
 {
+    public function productList()
+    {
+        $products = ImportData::where('status', '=', 'created')
+            ->get();
+        return response()->json([
+            'data' => $products,
+            'message' => 'Created List',
+            'status' => 200
+        ]);
+    }
+    public function productSearchList(Request $request) {
+        $product_filter = ImportData::where('status', $request->status)
+            ->where('assign_to', $request->delivery_man_id)
+            ->get();
+        return response()->json([
+           'data' => $product_filter
+        ]);
+    }
 
     public function assignedStatus(Request $request)
     {

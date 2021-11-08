@@ -6,6 +6,7 @@ use App\Imports\FileImport;
 use App\Models\ImportData;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
 
 class FileImportDataController extends Controller
 {
@@ -26,6 +27,34 @@ class FileImportDataController extends Controller
                 ->with('message', 'success');
         }
 
+    }
+    public function productCreateView() {
+        return view('createDeliveryProduct');
+    }
+    public function productCreate(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'price' => 'required',
+            'comment' => 'required'
+        ],
+        [
+            'name.required' => 'Fill up Name',
+            'phone.required' => 'Fill up Phone number',
+            'address.required' => 'Fill up Address',
+            'comment.required' => 'Fill up Comment'
+        ]);
+        $product_create = ImportData::create([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'price' => $request->price,
+            'comment' => $request->comment,
+            'status' => 'created'
+        ]);
+        return redirect()->route('product-list');
     }
     public function product_list()
     {

@@ -1,11 +1,10 @@
 @extends('master')
 @section('content')
 <h3 class="text-center my-4">Delivery Information</h3>
-<div class="container">
     <form action="{{route('date-filter')}}" method="get">
         @csrf
         <div class="row" style="margin-left: 100px">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
 {{--                    <label for="pure-date">Start Date</label>--}}
                     <div class="input-group mb-4">
@@ -15,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
 {{--                    <label for="from-date">End Date</label>--}}
                     <div class="input-group mb-4 constrained">
@@ -25,12 +24,16 @@
                     </div>
                 </div>
             </div>
-           <div class="col-md-4 ">
+           <div class="col-md-3" >
                <button class="btn btn-primary">Get Search List</button>
            </div>
+            <div class="col-md-3" style="padding-left: 33px">
+                <a href="{{route('create')}}" type="submit" class="btn btn-primary" >Add Product</a>
+                <a href="{{route('import-file')}}" type="submit" class="btn btn-primary">Import Files</a>
+            </div>
         </div>
     </form>
-</div>
+{{--</div>--}}
 <div class="m-4">
 <table class="table table-bordered">
     <thead>

@@ -17,7 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/task-list', 'App\Http\Controllers\FileDataHandleController@show')->name('task-list');
+Route::get('/task-list', 'App\Http\Controllers\StatusUpdateAPIController@productList')->name('task-list');
+Route::get('/task-search', 'App\Http\Controllers\StatusUpdateAPIController@productSearchList');
 Route::post('/task-list/assigned', 'App\Http\Controllers\StatusUpdateAPIController@assignedStatus');
 Route::post('/task-list/delivered', 'App\Http\Controllers\StatusUpdateAPIController@deliveredStatus');
 Route::post('/task-list/returned', 'App\Http\Controllers\StatusUpdateAPIController@returnStatus');

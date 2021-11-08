@@ -9,6 +9,7 @@ class FileDataHandleController extends Controller
 {
     public function show(Request $request)
     {
+//        dd($delivery_man_id);
         $import_table_data = ImportData::query();
         if ($request->has('status')) {
             $import_table_data->where('status', $request->status);
