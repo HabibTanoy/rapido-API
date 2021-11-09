@@ -1,6 +1,6 @@
 @extends('master')
 @section('content')
-    <h2 class="text-center mt-5 pt-5 mb-4">Product Details Create</h2>
+    <h2 class="text-center mt-5 mb-4">Create Delivery Details</h2>
     <div class="d-flex justify-content-center" style="margin: 0 auto;">
         <form action="{{route('create-product')}}" class="w-75" method="POST" enctype="multipart/form-data">
             @csrf
@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="text5" class="col-3 col-form-label">price</label>
+                <label for="text5" class="col-3 col-form-label">Price</label>
                 <div class="col-9">
                     <input id="text5" name="price" type="text" class="form-control">
                 </div>
@@ -35,8 +35,8 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">Add Product</button>
-                <a href="{{route('product-list')}}" type="submit" class="btn btn-primary">Product List</a>
+                <button type="submit" class="btn btn-primary">Add Delivery</button>
+{{--                <a href="{{route('product-list')}}" type="submit" class="btn btn-primary">Product List</a>--}}
             </div>
         </form>
 

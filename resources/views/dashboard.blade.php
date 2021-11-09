@@ -32,9 +32,9 @@
                 <label for="formFile" class="form-label"></label>
             </div>
             <div>
-                <button class="btn btn-primary m-2">Import data</button>
-                <a href="{{route('create')}}" type="submit" class="btn btn-primary">Add Product</a>
-                <a href="{{route('product-list')}}" type="submit" class="btn btn-primary">Product List</a>
+                <button class="btn btn-primary">Import data</button>
+{{--                <a href="{{route('create')}}" type="submit" class="btn btn-primary">Add Product</a>--}}
+{{--                <a href="{{route('product-list')}}" type="submit" class="btn btn-primary">Product List</a>--}}
             </div>
             {{--        <div class="row">--}}
             {{--            --}}

@@ -4,7 +4,7 @@
     <form action="{{route('date-filter')}}" method="get">
         @csrf
         <div class="row" style="margin-left: 100px">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
 {{--                    <label for="pure-date">Start Date</label>--}}
                     <div class="input-group mb-4">
@@ -14,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="form-group">
 {{--                    <label for="from-date">End Date</label>--}}
                     <div class="input-group mb-4 constrained">
@@ -24,12 +24,12 @@
                     </div>
                 </div>
             </div>
-           <div class="col-md-3" >
+           <div class="col-md-4" >
                <button class="btn btn-primary">Get Search List</button>
            </div>
             <div class="col-md-3" style="padding-left: 33px">
-                <a href="{{route('create')}}" type="submit" class="btn btn-primary" >Add Product</a>
-                <a href="{{route('dashboard')}}" type="submit" class="btn btn-primary">Import Files</a>
+{{--                <a href="{{route('create')}}" type="submit" class="btn btn-primary" >Add Product</a>--}}
+{{--                <a href="{{route('dashboard')}}" type="submit" class="btn btn-primary">Import Files</a>--}}
             </div>
         </div>
     </form>
