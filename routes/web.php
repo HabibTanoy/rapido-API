@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Route;
 //    return view('welcome');
 //});
 
-Route::get('/', 'App\Http\Controllers\FileImportDataController@fileImportExport')->name('import-file');
+//Route::get('/', 'App\Http\Controllers\FileImportDataController@fileImportExport')->name('import-file');
 Route::post('file-import', 'App\Http\Controllers\FileImportDataController@fileImport')->name('file-import');
 //Route::get('file-export', 'App\Http\Controllers\UserController@fileExport')->name('file-export');
 //Crud
@@ -18,4 +18,4 @@ Route::get('/task/{id}', 'App\Http\Controllers\FileDataHandleController@updateDa
 Route::post('/task-update/{id}', 'App\Http\Controllers\FileDataHandleController@updated')->name('task-update');
 Route::delete('/delete/{id}', 'App\Http\Controllers\FileDataHandleController@delete')->name('delete');
 Route::get('/search-data', 'App\Http\Controllers\FileDataHandleController@dateFilter')->name('date-filter');
-Route::get('/dashboard', 'App\Http\Controllers\FileDataHandleController@dataCount')->name('dashboard');
+Route::get('/', 'App\Http\Controllers\FileDataHandleController@dataCount')->name('dashboard');

@@ -49,7 +49,7 @@ class FileDataHandleController extends Controller
     {
         $start_date = $request->start_date;
         $end_date = $request->end_date;
-        $current_date = Carbon\Carbon::now()->format('Y-m-d');
+        $current_date = Carbon::now()->format('Y-m-d');
         if (is_null($start_date))
             $start_date = $current_date;
         if (is_null($end_date))
@@ -67,6 +67,7 @@ class FileDataHandleController extends Controller
             ->get();
 //        dd(count($today_data_count));
         $yesterday_data_count = ImportData::whereDate('created_at', Carbon::yesterday())
+            ->where('status', '=', 'delivered')
             ->get();
         return view('dashboard', compact('today_data_count', 'yesterday_data_count'));
     }
