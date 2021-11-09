@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ImportData;
 use Illuminate\Http\Request;
-use Carbon;
+use Carbon\Carbon;
+
 class FileDataHandleController extends Controller
 {
     public function show(Request $request)
@@ -44,7 +45,8 @@ class FileDataHandleController extends Controller
             ->delete();
         return redirect()->route('product-list');
     }
-    public function dateFilter(Request $request) {
+    public function dateFilter(Request $request)
+    {
         $start_date = $request->start_date;
         $end_date = $request->end_date;
         $current_date = Carbon\Carbon::now()->format('Y-m-d');
@@ -52,10 +54,21 @@ class FileDataHandleController extends Controller
             $start_date = $current_date;
         if (is_null($end_date))
             $end_date = $current_date;
-        $import_table_data = ImportData::whereDate('created_at', '>=', $start_date)
+        $list_of_product = ImportData::whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
             ->get();
-        return view('taskTableList', compact('import_table_data'));
+        return view('taskTableList', compact('list_of_product'));
+
+    }
+    public function dataCount()
+    {
+        $today_data_count = ImportData::whereDate('created_at', Carbon::today())
+            ->where('status', '=', 'delivered')
+            ->get();
+//        dd(count($today_data_count));
+        $yesterday_data_count = ImportData::whereDate('created_at', Carbon::yesterday())
+            ->get();
+        return view('dashboard', compact('today_data_count', 'yesterday_data_count'));
     }
 
 }

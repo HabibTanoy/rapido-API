@@ -18,3 +18,4 @@ Route::get('/task/{id}', 'App\Http\Controllers\FileDataHandleController@updateDa
 Route::post('/task-update/{id}', 'App\Http\Controllers\FileDataHandleController@updated')->name('task-update');
 Route::delete('/delete/{id}', 'App\Http\Controllers\FileDataHandleController@delete')->name('delete');
 Route::get('/search-data', 'App\Http\Controllers\FileDataHandleController@dateFilter')->name('date-filter');
+Route::get('/dashboard', 'App\Http\Controllers\FileDataHandleController@dataCount')->name('dashboard');
