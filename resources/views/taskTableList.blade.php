@@ -43,6 +43,9 @@
         <th scope="col">Address</th>
         <th scope="col">Price</th>
         <th scope="col">Comment</th>
+        <th scope="col">Status</th>
+        <th scope="col">Delivery Types</th>
+        <th scope="col">Assign_to</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
@@ -54,6 +57,9 @@
                 <td>{{$product_list->address}}</td>
                 <td>{{$product_list->price}}</td>
                 <td>{{$product_list->comment}}</td>
+                <td>{{$product_list->status}}</td>
+                <td>{{$product_list->delivery_types}}</td>
+                <td>{{$product_list->assign_to}}</td>
                 <td style="width:13%">
                     <div class="row">
                         <div class="col-md-4">

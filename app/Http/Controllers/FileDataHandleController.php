@@ -34,7 +34,8 @@ class FileDataHandleController extends Controller
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address,
-            'comment' => $request->comment
+            'comment' => $request->comment,
+            'delivery_types' => $request->delivery_types
         ];
         ImportData::where('id', $id)
             ->update($person_update_info);

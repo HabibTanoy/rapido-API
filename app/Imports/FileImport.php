@@ -23,8 +23,9 @@ class FileImport implements ToModel, WithStartRow
             'name'     => $row[0],
             'phone'    => $row[1],
             'address' => $row[2],
-            'price' => $row[3],
-            'comment' => $row[4],
+            'delivery_types' => $row[3],
+            'price' => $row[4],
+            'comment' => $row[5],
             'status' => 'created'
         ]);
     }

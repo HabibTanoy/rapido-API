@@ -18,6 +18,7 @@ class CreateImportDatasTable extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
+            $table->string('delivery_types')->nullable();
             $table->string('price')->nullable();
             $table->string('comment')->nullable();
             $table->string('status')->nullable();
