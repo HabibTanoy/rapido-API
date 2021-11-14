@@ -64,11 +64,15 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Email address</label>
                         <input type="email" name="email" class="form-control form-control-sm" aria-describedby="emailHelp">
+
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Password</label>
                         <!-- <a href="#" style="float:right;font-size:12px;">Forgot password?</a> -->
                         <input type="password" name="password" class="form-control form-control-sm">
+                        @if($errors->any())
+                            {!! implode('', $errors->all('<div>:message</div>')) !!}
+                        @endif
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Sign in</button>
 

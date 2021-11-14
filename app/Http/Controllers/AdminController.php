@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 
 class AdminController extends Controller
@@ -34,6 +35,9 @@ class AdminController extends Controller
         ])) {
             return redirect()->intended(route('dashboard'));
         }
+//        if($validator->fails()) {
+//            return Redirect::back()->withErrors($validator);
+//        }
         return redirect()->intended(route('admin-login'));
     }
 
