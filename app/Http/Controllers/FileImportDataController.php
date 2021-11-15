@@ -22,7 +22,7 @@ class FileImportDataController extends Controller
             return back()->with('errorMessage','No file selected');
         } else
         {
-            Excel::import(new FileImport, $request->file('file')->store('temp'));
+         Excel::import(new FileImport, $request->file('file')->store('temp'));
             return redirect()->route('product-list')
                 ->with('message', 'success');
         }
@@ -58,8 +58,24 @@ class FileImportDataController extends Controller
     }
     public function product_list()
     {
-        $list_of_product = ImportData::all();
-        return view('taskTableList', compact('list_of_product'));
+        $orders = ImportData::get();
+        foreach ($orders as $order) {
+            $types = $order->delivery_types;
+//        dd($types);
+            if ($types == "Regular") {
+                $order_id = 'RPDR-' . $order->id;
+                $order->order_number = $order_id;
+            }
+            elseif ($types == "Express") {
+                $order_id = 'RPDE-' . $order->id;
+                $order->order_number = $order_id;
+            }
+            elseif ($types == "Next Day") {
+                $order_id = 'RPDN-' . $order->id;
+                $order->order_number = $order_id;
+            }
+        }
+        return view('taskTableList', compact('orders'));
     }
     //    public function fileExport()
 //    {

@@ -38,6 +38,7 @@
 <table class="table table-bordered">
     <thead>
     <tr>
+        <th scope="col">Order ID</th>
         <th scope="col">Name</th>
         <th scope="col">Phone</th>
         <th scope="col">Address</th>
@@ -50,23 +51,28 @@
     </tr>
     </thead>
     <tbody>
-        @foreach( $list_of_product as  $product_list)
+        @foreach( $orders as  $order)
             <tr>
-                <td>{{$product_list->name}}</td>
-                <td>{{$product_list->phone}}</td>
-                <td>{{$product_list->address}}</td>
-                <td>{{$product_list->price}}</td>
-                <td>{{$product_list->comment}}</td>
-                <td>{{$product_list->status}}</td>
-                <td>{{$product_list->delivery_types}}</td>
-                <td>{{$product_list->assign_to}}</td>
+                <td>{{$order->order_number}}</td>
+                <td>{{$order->name}}</td>
+                <td>{{$order->phone}}</td>
+                <td>{{$order->address}}</td>
+                <td>{{$order->price}}</td>
+                <td>{{$order->comment}}</td>
+                <td>{{$order->status}}</td>
+                <td>{{$order->delivery_types}}</td>
+                @if($order->assign_to ==  null)
+                    <td>N/A</td>
+                @else
+                <td>{{$order->assign_to}}</td>
+                @endif
                 <td style="width:13%">
                     <div class="row">
                         <div class="col-md-4">
-                            <a class="btn btn-primary" href="{{route('task-update-info', $product_list->id)}}" role="button">Edit</a>
+                            <a class="btn btn-primary" href="{{route('task-update-info', $order->id)}}" role="button">Edit</a>
                         </div>
                         <div class="col-md-4">
-                            <form action="{{route('delete', $product_list->id)}}" method='post'>
+                            <form action="{{route('delete', $order->id)}}" method='post'>
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
