@@ -44,9 +44,9 @@
         <th scope="col">Address</th>
         <th scope="col">Price</th>
         <th scope="col">Comment</th>
-        <th scope="col">Status</th>
         <th scope="col">Delivery Types</th>
         <th scope="col">Assign_to</th>
+        <th scope="col">Status</th>
         <th scope="col">Action</th>
     </tr>
     </thead>
@@ -59,13 +59,13 @@
                 <td>{{$order->address}}</td>
                 <td>{{$order->price}}</td>
                 <td>{{$order->comment}}</td>
-                <td>{{$order->status}}</td>
                 <td>{{$order->delivery_types}}</td>
                 @if($order->assign_to ==  null)
                     <td>N/A</td>
                 @else
-                <td>{{$order->assign_to}}</td>
+                    <td>{{$order->assign_to}}</td>
                 @endif
+                <td>{{$order->status}}</td>
                 <td style="width:13%">
                     <div class="row">
                         <div class="col-md-4">

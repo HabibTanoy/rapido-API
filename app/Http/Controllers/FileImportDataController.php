@@ -59,24 +59,9 @@ class FileImportDataController extends Controller
     public function product_list()
     {
         $orders = ImportData::get();
-        foreach ($orders as $order) {
-            $types = $order->delivery_types;
-//        dd($types);
-            if ($types == "Regular") {
-                $order_id = 'RPDR-' . $order->id;
-                $order->order_number = $order_id;
-            }
-            elseif ($types == "Express") {
-                $order_id = 'RPDE-' . $order->id;
-                $order->order_number = $order_id;
-            }
-            elseif ($types == "Next Day") {
-                $order_id = 'RPDN-' . $order->id;
-                $order->order_number = $order_id;
-            }
-        }
         return view('taskTableList', compact('orders'));
     }
+
     //    public function fileExport()
 //    {
 //        return Excel::download(new UsersExport, 'users-collection.xlsx');

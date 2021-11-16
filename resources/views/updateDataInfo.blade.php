@@ -31,27 +31,27 @@
             <div class="form-group row">
                 <label for="text3" class="col-3 col-form-label">Status</label>
                 <div class="col-9">
-                    <select class="form-select" aria-label="Default select example">
+                    <select class="form-select" name="update_status" aria-label="Default select example">
 {{--                        <option selected>Open this select menu</option>--}}
-                        <option name="" value="1">Assigned</option>
-                        <option name="" value="2">Delivered</option>
-                        <option name="" value="3">Return</option>
-                        <option name="" value="3">Cancel</option>
+                        <option value="assigned">Assigned</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="returned">Returned</option>
+                        <option value="cancelled">Cancelled</option>
                     </select>
                 </div>
             </div>
-            <div class="form-group row">
-                <label for="text3" class="col-3 col-form-label">Assigned_to</label>
-                <div class="col-9">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>name</option>
-                        <option name="" value="1">Assigned</option>
-                        <option name="" value="2">Delivered</option>
-                        <option name="" value="3">Return</option>
-                        <option name="" value="3">Cancel</option>
-                    </select>
-                </div>
-            </div>
+{{--            <div class="form-group row">--}}
+{{--                <label for="text3" class="col-3 col-form-label">Assigned_to</label>--}}
+{{--                <div class="col-9">--}}
+{{--                    <select class="form-select" aria-label="Default select example">--}}
+{{--                        <option selected>name</option>--}}
+{{--                        <option name="" value="1">Assigned</option>--}}
+{{--                        <option name="" value="2">Delivered</option>--}}
+{{--                        <option name="" value="3">Return</option>--}}
+{{--                        <option name="" value="3">Cancel</option>--}}
+{{--                    </select>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>

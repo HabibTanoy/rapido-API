@@ -35,7 +35,7 @@ class FileDataHandleController extends Controller
             'phone' => $request->phone,
             'address' => $request->address,
             'comment' => $request->comment,
-            'delivery_types' => $request->delivery_types
+            'status' => $request->update_status
         ];
         ImportData::where('id', $id)
             ->update($person_update_info);
@@ -55,10 +55,10 @@ class FileDataHandleController extends Controller
             $start_date = $current_date;
         if (is_null($end_date))
             $end_date = $current_date;
-        $list_of_product = ImportData::whereDate('created_at', '>=', $start_date)
+        $orders = ImportData::whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
             ->get();
-        return view('taskTableList', compact('list_of_product'));
+        return view('taskTableList', compact('orders'));
 
     }
     public function dataCount()
