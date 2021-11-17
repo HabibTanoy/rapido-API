@@ -57,11 +57,13 @@
             <div class="form-group row">
                 <label for="text3" class="col-3 col-form-label">Agents</label>
                 <div class="col-9">
-                    <select class="form-select" name="agent_id" aria-label="Default select example">
+                    <select class="form-select" name="agent_id" aria-label="Default select example" id="agent_id">
+                        <option value="" disabled selected>Please Select An Agent</option>
                         @foreach($agents as $agent)
                             <option value="{{$agent['user_id']}}">{{$agent["name"]}}</option>
                         @endforeach
                     </select>
+                    <input type="hidden" name="agent_name" id="agent_name">
                 </div>
             </div>
             <div class="text-center">
@@ -70,3 +72,18 @@
         </form>
 
 @endsection
+
+@push('scripts')
+<script>
+    var agents = JSON.parse('{!! json_encode($agents) !!}');
+
+    $('#agent_id').change(function () {
+        let agent_id = $('#agent_id option:selected').val();
+        agents.forEach(function (agent) {
+            if (parseInt(agent.user_id) == parseInt(agent_id)) {
+                $('#agent_name').val(agent.name);
+            }
+        });
+    });
+</script>
+@endpush

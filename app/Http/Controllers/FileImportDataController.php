@@ -64,7 +64,8 @@ class FileImportDataController extends Controller
             'comment' => $request->comment,
             'status' => $request->create_status,
             'delivery_types' => $request->create_types,
-            'assign_to' => $request->agent_id
+            'assign_to' => $request->agent_id,
+            'assigned_name' => $request->agent_name
         ]);
         return redirect()->route('order-list');
     }

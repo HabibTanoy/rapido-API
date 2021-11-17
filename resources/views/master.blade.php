@@ -26,4 +26,5 @@
 @include('includes.header')
     @yield('content')
 </body>
+@stack('scripts')
 </html>
