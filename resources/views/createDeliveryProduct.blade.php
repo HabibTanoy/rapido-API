@@ -34,9 +34,38 @@
                     <input id="text3" name="comment" type="text" class="form-control">
                 </div>
             </div>
+            <div class="form-group row">
+                <label for="text3" class="col-3 col-form-label">Status</label>
+                <div class="col-9">
+                    <select class="form-select" name="create_status" aria-label="Default select example">
+                        <option value="created">Created</option>
+                        <option value="assigned">Assigned</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="text3" class="col-3 col-form-label">Delivery Types</label>
+                <div class="col-9">
+                    <select class="form-select" name="create_types" aria-label="Default select example">
+                        <option value="Regular">Regular</option>
+                        <option value="Express">Express</option>
+                        <option value="Next Day">Next Day</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="text3" class="col-3 col-form-label">Agents</label>
+                <div class="col-9">
+                    <select class="form-select" name="agent_id" aria-label="Default select example">
+                        @foreach($agents as $agent)
+                            <option value="{{$agent['user_id']}}">{{$agent["name"]}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Add Delivery</button>
-{{--                <a href="{{route('product-list')}}" type="submit" class="btn btn-primary">Product List</a>--}}
             </div>
         </form>
 

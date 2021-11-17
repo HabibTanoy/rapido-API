@@ -28,8 +28,6 @@
                <button class="btn btn-primary">Get Search List</button>
            </div>
             <div class="col-md-3" style="padding-left: 33px">
-{{--                <a href="{{route('create')}}" type="submit" class="btn btn-primary" >Add Product</a>--}}
-{{--                <a href="{{route('dashboard')}}" type="submit" class="btn btn-primary">Import Files</a>--}}
             </div>
         </div>
     </form>

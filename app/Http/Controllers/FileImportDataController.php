@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\FileImport;
 use App\Models\ImportData;
+use App\Tools\FetchTraceUsers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use Carbon\Carbon;
@@ -29,16 +30,24 @@ class FileImportDataController extends Controller
 
     }
     public function productCreateView() {
-        return view('createDeliveryProduct');
+        $agents = (new FetchTraceUsers())
+            ->setApiKey(env('BKOI_TRACE_API_KEY'))
+            ->get();
+//        dd($agents);
+        return view('createDeliveryProduct',compact('agents'));
     }
     public function productCreate(Request $request)
     {
+        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
             'price' => 'required',
-            'comment' => 'required'
+            'comment' => 'required',
+            'create_status' => 'required',
+            'create_types' => 'required',
+            'agent_id' => 'required'
         ],
         [
             'name.required' => 'Fill up Name',
@@ -52,7 +61,9 @@ class FileImportDataController extends Controller
             'address' => $request->address,
             'price' => $request->price,
             'comment' => $request->comment,
-            'status' => 'created'
+            'status' => $request->create_status,
+            'delivery_types' => $request->create_types,
+            'assign_to' => $request->agent_id
         ]);
         return redirect()->route('product-list');
     }
