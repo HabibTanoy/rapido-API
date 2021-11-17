@@ -63,7 +63,7 @@
                 @if($order->assign_to ==  null)
                     <td>N/A</td>
                 @else
-                    <td>{{$order->assign_to}}</td>
+                    <td>{{$order->assigned_name}}</td>
                 @endif
                 <td>{{$order->status}}</td>
                 <td style="width:13%">

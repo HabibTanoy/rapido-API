@@ -37,19 +37,20 @@ class StatusUpdateAPIController extends Controller
 
     public function assignedStatus(Request $request)
     {
-         $validator = Validator::make($request->all(),
-         [
-             'product_id' => 'required',
-             'delivery_man_id' => 'required'
-         ]);
-         if ($validator->fails()) {
-             return response()->json([
-                 'message' => 'Parameter not found'
-             ]);
-         }
+        $validator = Validator::make($request->all(),
+            [
+                'product_id' => 'required',
+                'delivery_man_id' => 'required',
+                'delivery_man_name' => 'required'
+            ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Parameter not found'
+            ]);
+        }
         $product_id = $request->product_id;
         $product = ImportData::find($product_id);
-        if ($product->status != "created") {
+        if (strtolower($product->status) != "created") {
             return response()->json([
                 'message' => 'Already Assigned'
             ]);
@@ -57,14 +58,16 @@ class StatusUpdateAPIController extends Controller
         $assigned = 'assigned';
         $product->update([
             'status' => $assigned,
-           'assign_to' => $request->delivery_man_id
+            'assign_to' => $request->delivery_man_id,
+            'assigned_name' => $request->delivery_man_name
         ]);
         return response()->json([
-           "data" => $product,
-           'message' => 'Assigned',
-           'status' => 200
+            "data" => $product,
+            'message' => 'Assigned',
+            'status' => 200
         ]);
     }
+
     // Delivered API
     public function deliveredStatus(Request $request)
     {
@@ -81,7 +84,7 @@ class StatusUpdateAPIController extends Controller
         }
         $product_id = $request->product_id;
         $product = ImportData::find($product_id);
-        if ($product->status != "assigned") {
+        if (strtolower($product->status) != "assigned") {
            return response()->json([
                 'message' => 'Already Delivered'
            ]);
@@ -113,7 +116,7 @@ class StatusUpdateAPIController extends Controller
         }
         $product_id = $request->product_id;
         $product = ImportData::find($product_id);
-        if ($product->status != "assigned") {
+        if (strtolower($product->status) != "assigned") {
             return response()->json([
                 'message' => 'Return Product'
             ]);
@@ -144,7 +147,7 @@ class StatusUpdateAPIController extends Controller
         }
         $product_id = $request->product_id;
         $product = ImportData::find($product_id);
-        if ($product->status != "assigned") {
+        if (strtolower($product->status) != "assigned") {
             return response()->json([
                 'message' => 'Cancel Product'
             ]);
