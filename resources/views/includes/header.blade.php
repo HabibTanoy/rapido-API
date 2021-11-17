@@ -15,7 +15,7 @@
                     <a class="nav-link" aria-current="page" href="{{route('create')}}">Add Delivery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{route('product-list')}}">Delivery List</a>
+                    <a class="nav-link" aria-current="page" href="{{route('order-list')}}">Delivery List</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">

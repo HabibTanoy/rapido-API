@@ -2,7 +2,7 @@
 @section('content')
     <h2 class="text-center mt-5 mb-4">Create Delivery Details</h2>
     <div class="d-flex justify-content-center" style="margin: 0 auto;">
-        <form action="{{route('create-product')}}" class="w-75" method="POST" enctype="multipart/form-data">
+        <form action="{{route('order-create')}}" class="w-75" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group row">
                 <label for="text1" class="col-3 col-form-label">Name</label>

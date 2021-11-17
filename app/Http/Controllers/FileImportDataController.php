@@ -11,11 +11,12 @@ use Carbon\Carbon;
 
 class FileImportDataController extends Controller
 {
+    // view for file import
     public function fileImportExport()
     {
         return view('fileimport');
     }
-
+    // import data for file like(csv)
     public function fileImport(Request $request)
     {
         if (empty($request->file('file')))
@@ -24,21 +25,21 @@ class FileImportDataController extends Controller
         } else
         {
          Excel::import(new FileImport, $request->file('file')->store('temp'));
-            return redirect()->route('product-list')
+            return redirect()->route('order-list')
                 ->with('message', 'success');
         }
 
     }
-    public function productCreateView() {
+    // trace api delivery man data information
+    public function orderCreateView() {
         $agents = (new FetchTraceUsers())
             ->setApiKey(env('BKOI_TRACE_API_KEY'))
             ->get();
-//        dd($agents);
         return view('createDeliveryProduct',compact('agents'));
     }
-    public function productCreate(Request $request)
+    // order create by dashboard view
+    public function orderCreate(Request $request)
     {
-        dd($request->all());
         $this->validate($request, [
             'name' => 'required',
             'phone' => 'required',
@@ -55,7 +56,7 @@ class FileImportDataController extends Controller
             'address.required' => 'Fill up Address',
             'comment.required' => 'Fill up Comment'
         ]);
-        $product_create = ImportData::create([
+        $order_create = ImportData::create([
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address,
@@ -65,12 +66,13 @@ class FileImportDataController extends Controller
             'delivery_types' => $request->create_types,
             'assign_to' => $request->agent_id
         ]);
-        return redirect()->route('product-list');
+        return redirect()->route('order-list');
     }
-    public function product_list()
+
+    public function listOfOrder()
     {
         $orders = ImportData::get();
-        return view('taskTableList', compact('orders'));
+        return view('orderList', compact('orders'));
     }
 
     //    public function fileExport()

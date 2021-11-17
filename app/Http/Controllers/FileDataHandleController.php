@@ -8,29 +8,29 @@ use Carbon\Carbon;
 
 class FileDataHandleController extends Controller
 {
-    public function show(Request $request)
-    {
-//        dd($delivery_man_id);
-        $import_table_data = ImportData::query();
-        if ($request->has('status')) {
-            $import_table_data->where('status', $request->status);
-        }
+    // public function show(Request $request)
+    // {
+    //     $import_table_data = ImportData::query();
+    //     if ($request->has('status')) {
+    //         $import_table_data->where('status', $request->status);
+    //     }
 
-        $import_table_data = $import_table_data->get();
-        return response()->json([
-            'task' => $import_table_data,
-            'message' => 'Created',
-            'status' => 200
-        ]);
-    }
-    public function updateData($id) {
-        $per_person_info = ImportData::where('id', $id)
+    //     $import_table_data = $import_table_data->get();
+    //     return response()->json([
+    //         'task' => $import_table_data,
+    //         'message' => 'Created',
+    //         'status' => 200
+    //     ]);
+    // }
+    public function updateOrderInformation($id) {
+        $order_update = ImportData::where('id', $id)
             ->first();
-        return view('updateDataInfo', compact('per_person_info'));
+        return view('updateOrder', compact('order_update'));
     }
-    public function updated(Request $request, $id)
+//for update order information
+    public function updatedOrder(Request $request, $id)
     {
-        $person_update_info = [
+        $update_order_info = [
             'name' => $request->name,
             'phone' => $request->phone,
             'address' => $request->address,
@@ -38,15 +38,17 @@ class FileDataHandleController extends Controller
             'status' => $request->update_status
         ];
         ImportData::where('id', $id)
-            ->update($person_update_info);
-        return redirect()->route('product-list');
+            ->update($update_order_info);
+        return redirect()->route('order-list');
     }
-    public function delete($id) {
+// for delete order
+    public function deleteOrder($id) {
         ImportData::where('id', $id)
             ->delete();
-        return redirect()->route('product-list');
+        return redirect()->route('order-list');
     }
-    public function dateFilter(Request $request)
+// filter order list by date
+    public function orderDateFilter(Request $request)
     {
         $start_date = $request->start_date;
         $end_date = $request->end_date;
@@ -58,15 +60,14 @@ class FileDataHandleController extends Controller
         $orders = ImportData::whereDate('created_at', '>=', $start_date)
             ->whereDate('created_at', '<=', $end_date)
             ->get();
-        return view('taskTableList', compact('orders'));
-
+        return view('orderList', compact('orders'));
     }
+// data count for how many deliverd in today and yesterday
     public function dataCount()
     {
         $today_data_count = ImportData::whereDate('created_at', Carbon::today())
             ->where('status', '=', 'delivered')
             ->get();
-//        dd(count($today_data_count));
         $yesterday_data_count = ImportData::whereDate('created_at', Carbon::yesterday())
             ->where('status', '=', 'delivered')
             ->get();
