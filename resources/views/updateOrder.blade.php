@@ -32,7 +32,7 @@
                 <label for="text3" class="col-3 col-form-label">Status</label>
                 <div class="col-9">
                     <select class="form-select" name="update_status" aria-label="Default select example" value="{{$order_update->status}}">
-                        <option selected>Select Status</option>
+                        <option disabled selected>Select Status</option>
                         <option value="assigned">Assigned</option>
                         <option value="delivered">Delivered</option>
                         <option value="returned">Returned</option>

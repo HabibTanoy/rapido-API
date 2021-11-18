@@ -36,13 +36,13 @@
 <table class="table table-bordered">
     <thead>
     <tr>
-        <th scope="col">Order ID</th>
+        <th style="white-space: nowrap" scope="col">Order ID</th>
         <th scope="col">Name</th>
         <th scope="col">Phone</th>
         <th scope="col">Address</th>
         <th scope="col">Price</th>
         <th scope="col">Comment</th>
-        <th scope="col">Delivery Types</th>
+        <th style="white-space: nowrap;" scope="col">Delivery Types</th>
         <th scope="col">Assign_to</th>
         <th scope="col">Status</th>
         <th scope="col">Action</th>
@@ -51,8 +51,8 @@
     <tbody>
         @foreach( $orders as  $order)
             <tr>
-                <td>{{$order->order_number}}</td>
-                <td>{{$order->name}}</td>
+                <td >{{$order->order_number}}</td>
+                <td >{{$order->name}}</td>
                 <td>{{$order->phone}}</td>
                 <td>{{$order->address}}</td>
                 <td>{{$order->price}}</td>

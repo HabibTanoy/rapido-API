@@ -66,7 +66,7 @@
                     <input type="hidden" name="agent_name" id="agent_name">
                 </div>
             </div>
-            <div class="text-center">
+            <div class="text-center mb-4">
                 <button type="submit" class="btn btn-primary">Add Delivery</button>
             </div>
         </form>
