@@ -31,8 +31,8 @@
             <div class="form-group row">
                 <label for="text3" class="col-3 col-form-label">Status</label>
                 <div class="col-9">
-                    <select class="form-select" name="update_status" aria-label="Default select example">
-{{--                        <option selected>Open this select menu</option>--}}
+                    <select class="form-select" name="update_status" aria-label="Default select example" value="{{$order_update->status}}">
+                        <option selected>Select Status</option>
                         <option value="assigned">Assigned</option>
                         <option value="delivered">Delivered</option>
                         <option value="returned">Returned</option>
@@ -40,20 +40,35 @@
                     </select>
                 </div>
             </div>
-{{--            <div class="form-group row">--}}
-{{--                <label for="text3" class="col-3 col-form-label">Assigned_to</label>--}}
-{{--                <div class="col-9">--}}
-{{--                    <select class="form-select" aria-label="Default select example">--}}
-{{--                        <option selected>name</option>--}}
-{{--                        <option name="" value="1">Assigned</option>--}}
-{{--                        <option name="" value="2">Delivered</option>--}}
-{{--                        <option name="" value="3">Return</option>--}}
-{{--                        <option name="" value="3">Cancel</option>--}}
-{{--                    </select>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="form-group row">
+                <label for="text3" class="col-3 col-form-label">Agents</label>
+                <div class="col-9">
+                    <select class="form-select" name="agent_id" aria-label="Default select example" id="agent_id">
+                        <option value="" disabled selected>Please Select An Agent</option>
+                        @foreach($agents as $agent)
+                            <option value="{{$agent['user_id']}}">{{$agent["name"]}}</option>
+                        @endforeach
+                    </select>
+                    <input type="hidden" name="agent_name" id="agent_name">
+                </div>
+            </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </form>
 @endsection
+
+        @push('scripts')
+            <script>
+                var agents = JSON.parse('{!! json_encode($agents) !!}');
+
+                $('#agent_id').change(function () {
+                    let agent_id = $('#agent_id option:selected').val();
+                    agents.forEach(function (agent) {
+                        if (parseInt(agent.user_id) == parseInt(agent_id)) {
+                            $('#agent_name').val(agent.name);
+                        }
+                    });
+                });
+            </script>
+    @endpush

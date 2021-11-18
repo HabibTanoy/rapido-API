@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-
+//Route::get('/users', 'App\Http\Controllers\FileDataHandleController@orderCreateView');
 Route::get('/', function() {
     return redirect()->route('admin-login');
 });

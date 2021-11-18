@@ -3,29 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\ImportData;
+use App\Tools\FetchTraceUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class FileDataHandleController extends Controller
 {
-    // public function show(Request $request)
-    // {
-    //     $import_table_data = ImportData::query();
-    //     if ($request->has('status')) {
-    //         $import_table_data->where('status', $request->status);
-    //     }
-
-    //     $import_table_data = $import_table_data->get();
-    //     return response()->json([
-    //         'task' => $import_table_data,
-    //         'message' => 'Created',
-    //         'status' => 200
-    //     ]);
-    // }
     public function updateOrderInformation($id) {
         $order_update = ImportData::where('id', $id)
             ->first();
-        return view('updateOrder', compact('order_update'));
+        $agents = (new FetchTraceUsers())
+            ->setApiKey(env('BKOI_TRACE_API_KEY'))
+            ->get();
+        return view('updateOrder', compact('order_update', 'agents'));
     }
 //for update order information
     public function updatedOrder(Request $request, $id)
@@ -35,7 +25,9 @@ class FileDataHandleController extends Controller
             'phone' => $request->phone,
             'address' => $request->address,
             'comment' => $request->comment,
-            'status' => $request->update_status
+            'status' => $request->update_status,
+            'assign_to' => $request->agent_id,
+            'assigned_name' => $request->agent_name
         ];
         ImportData::where('id', $id)
             ->update($update_order_info);
